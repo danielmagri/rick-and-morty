@@ -1,7 +1,10 @@
 import { Character, Pagination } from "../../../models";
+import { Either } from "../../../../core/models";
 
 export interface GetCharacters {
-  get(params: GetCharacters.Params): Promise<GetCharacters.Response>;
+  get(
+    params: GetCharacters.Params
+  ): Promise<Either<GetCharacters.Response>>;
 }
 
 export namespace GetCharacters {
