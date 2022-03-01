@@ -68,6 +68,7 @@ export const SideBar: React.FC = (props) => {
         variant="permanent"
         sx={{
           display: { xs: "none", sm: "block" },
+          width: drawerWidth,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: drawerWidth,
@@ -78,7 +79,10 @@ export const SideBar: React.FC = (props) => {
       >
         {drawer}
       </Drawer>
-      <ContentStyle>{props.children}</ContentStyle>
+      <ContentStyle>
+        <Toolbar />
+        {props.children}
+      </ContentStyle>
     </ContainerStyle>
   );
 };

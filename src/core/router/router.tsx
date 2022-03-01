@@ -1,15 +1,15 @@
 import React from "react";
 import { HashRouter, Route, Routes } from "react-router-dom";
-import { HomePage } from "../../presentation/pages";
+import { makeHomePage } from "../factories/presentation";
 import { Header, SideBar } from "../../presentation/components";
 
 export const Router: React.FC = () => {
   return (
     <HashRouter>
-        <Header />
+      <Header />
       <SideBar>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={makeHomePage()} />
         </Routes>
       </SideBar>
     </HashRouter>
