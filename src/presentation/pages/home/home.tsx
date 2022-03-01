@@ -7,6 +7,7 @@ import {
   charactersSlice,
   selectCharacters,
   selectCurrentPage,
+  selectFilter,
 } from "../../../core/context";
 import { GetCharacters } from "../../../domain/usecases";
 import { ItemCard } from "./components";
@@ -18,6 +19,7 @@ type HomePageProps = {
 
 export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
   const characters = useSelector(selectCharacters);
+  const filter = useSelector(selectFilter);
   const pagination = useSelector(selectPagination);
   const currentPage = useSelector(selectCurrentPage);
 
@@ -29,6 +31,9 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
     getCharacters
       .get({
         page: currentPage,
+        name: filter.name,
+        gender: filter.gender,
+        status: filter.status,
       })
       .then((data) => dispatch(charactersSlice.actions.setCharacters(data)))
       .catch((error) => console.log(error));
@@ -40,7 +45,7 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
 
   useEffect(() => {
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, filter]);
 
   useEffect(() => {
     const listener = () => {

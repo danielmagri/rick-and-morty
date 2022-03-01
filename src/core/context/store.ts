@@ -6,4 +6,5 @@ export const store = configureStore({
     sidebar: sidebarSlice.reducer,
     characters: charactersSlice.reducer,
   },
+
 });

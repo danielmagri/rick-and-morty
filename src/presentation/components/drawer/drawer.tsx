@@ -1,50 +1,133 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
-  List,
-  ListItem,
-  Divider,
+  FormControl,
+  InputLabel,
+  Select,
   Toolbar,
-  ListItemIcon,
-  ListItemText,
+  MenuItem,
+  OutlinedInput,
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
-import { AdUnits, AddAlarm } from "@mui/icons-material/";
 import { useSelector, useDispatch } from "react-redux";
-import { selectSidebar, sidebarSlice } from "../../../core/context";
+import { Clear } from "@mui/icons-material";
+import {
+  selectSidebar,
+  selectFilter,
+  sidebarSlice,
+  charactersSlice,
+} from "../../../core/context";
 import { ContainerStyle, ContentStyle, drawerWidth } from "./style";
+import { Character } from "../../../domain/models";
 
 export const SideBar: React.FC = (props) => {
   const mobileOpen = useSelector(selectSidebar);
+  const filter = useSelector(selectFilter);
+  const [name, setName] = useState("");
+
   const dispatch = useDispatch();
 
   const handleDrawerToggle = () => {
     dispatch(sidebarSlice.actions.toggle());
   };
 
+  const handleChangeName = (value: string) => {
+    setName(value);
+  };
+
+  const clearNameFilter = () => {
+    setName("");
+    dispatch(charactersSlice.actions.setNameFilter(undefined));
+  };
+
+  const selectStatus = (value: string) => {
+    dispatch(
+      charactersSlice.actions.setStatusFilter(value as Character.StatusType)
+    );
+  };
+
+  const selectGender = (value: string) => {
+    dispatch(
+      charactersSlice.actions.setGenderFilter(value as Character.GenderType)
+    );
+  };
+
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      dispatch(charactersSlice.actions.setNameFilter(name));
+    }, 1000);
+
+    return () => clearTimeout(delayDebounce);
+  }, [name]);
+
   const drawer = (
     <>
       <Toolbar />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <AdUnits /> : <AddAlarm />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <AdUnits /> : <AddAlarm />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+      <FormControl sx={{ m: 1, minWidth: 80 }} variant="outlined">
+        <InputLabel htmlFor="outlined-name">Name</InputLabel>
+        <OutlinedInput
+          id="outlined-name"
+          value={name}
+          onChange={(event) => handleChangeName(event.target.value)}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="clear name"
+                onClick={clearNameFilter}
+                edge="end"
+              >
+                <Clear />
+              </IconButton>
+            </InputAdornment>
+          }
+          label="Name"
+        />
+      </FormControl>
+
+      <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="status-label">Status</InputLabel>
+        <Select
+          displayEmpty
+          labelId="status-label"
+          id="status-id"
+          value={filter.status ?? ""}
+          label="Status"
+          onChange={(event) => selectStatus(event.target.value)}
+        >
+          <MenuItem value={undefined}>
+            <em>None</em>
+          </MenuItem>
+          {Object.values(Character.StatusType).map((item) => (
+            <MenuItem key={item} value={item}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <FormControl sx={{ m: 1, minWidth: 80 }}>
+        <InputLabel id="gender-label">Gender</InputLabel>
+        <Select
+          displayEmpty
+          labelId="gender-label"
+          id="gender-id"
+          value={filter.gender ?? ""}
+          label="Gender"
+          onChange={(event) =>
+            selectGender(event.target.value as Character.GenderType)
+          }
+        >
+          <MenuItem value={undefined}>
+            <em>None</em>
+          </MenuItem>
+          {Object.values(Character.GenderType).map((item) => (
+            <MenuItem key={item} value={item}>
+              {item}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </>
   );
 

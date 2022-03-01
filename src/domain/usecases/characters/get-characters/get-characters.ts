@@ -7,7 +7,10 @@ export interface GetCharacters {
 export namespace GetCharacters {
   export type Params = {
     page: number;
+    name?: string;
+    gender?: Character.GenderType;
+    status?: Character.StatusType;
   };
-  
+
   export type Response = Pagination.Model<Character.Model>;
 }
