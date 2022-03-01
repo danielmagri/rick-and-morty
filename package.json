@@ -1,6 +1,7 @@
 {
   "name": "rick-and-morty",
   "version": "0.1.0",
+  "homepage": "https://danielmagri.github.io/rick-and-morty",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.1",
@@ -22,6 +23,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -45,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^4.3.0"
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "gh-pages": "^3.2.3"
   }
 }
