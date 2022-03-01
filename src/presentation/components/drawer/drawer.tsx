@@ -22,7 +22,7 @@ import { ContainerStyle, ContentStyle, drawerWidth } from "./style";
 import { Character } from "../../../domain/models";
 
 export const SideBar: React.FC = (props) => {
-  const mobileOpen = useSelector(selectSidebar);
+  const store = useSelector(selectSidebar);
   const filter = useSelector(selectFilter);
   const [name, setName] = useState("");
 
@@ -135,7 +135,7 @@ export const SideBar: React.FC = (props) => {
     <ContainerStyle>
       <Drawer
         variant="temporary"
-        open={mobileOpen}
+        open={store.mobileOpen && store.enabled}
         onClose={handleDrawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
@@ -147,21 +147,22 @@ export const SideBar: React.FC = (props) => {
       >
         {drawer}
       </Drawer>
-      <Drawer
-        variant="permanent"
-        sx={{
-          display: { xs: "none", sm: "block" },
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {
+      {store.enabled && (
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: "none", sm: "block" },
             width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        open
-      >
-        {drawer}
-      </Drawer>
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      )}
       <ContentStyle>
         <Toolbar />
         {props.children}

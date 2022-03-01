@@ -10,11 +10,12 @@ import {
 
 type ItemCardProps = {
   data: Character.Model;
+  onClick?: () => void;
 };
 
-export const ItemCard: React.FC<ItemCardProps> = ({ data }) => {
+export const ItemCard: React.FC<ItemCardProps> = ({ data, onClick }) => {
   return (
-    <ContainerStyle>
+    <ContainerStyle onClick={onClick}>
       <ImageStyle src={data.image} />
       <NameStyle>{data.name}</NameStyle>
       <SpecieStyle>{data.species}</SpecieStyle>

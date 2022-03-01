@@ -18,6 +18,7 @@ type HomePageProps = {
 };
 
 export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
+  
   const characters = useSelector(selectCharacters);
   const filter = useSelector(selectFilter);
   const pagination = useSelector(selectPagination);
@@ -30,6 +31,8 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
 
   const fetchData = () => {
     setLoading(true);
+    setError(undefined);
+
     getCharacters
       .get({
         page: currentPage,
@@ -41,8 +44,7 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
         handleEither(
           either,
           (data) => {
-            dispatch(charactersSlice.actions.setCharacters(data));
-            setError(undefined);
+            dispatch(charactersSlice.actions.setData(data));
           },
           setError
         )

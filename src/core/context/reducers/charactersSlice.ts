@@ -32,7 +32,7 @@ export const charactersSlice = createSlice({
   name: "characters",
   initialState: initialState,
   reducers: {
-    setCharacters: (
+    setData: (
       state,
       action: PayloadAction<Pagination.Model<Character.Model>>
     ) => {
@@ -65,6 +65,13 @@ export const charactersSlice = createSlice({
 
 export const selectCharacters = (state: any): Character.Model[] =>
   state.characters.characters;
+
+export const selectCharacter =
+  (id: number) =>
+  (state: any): Character.Model | undefined =>
+    (state.characters.characters as Character.Model[]).find(
+      (item) => item.id === id
+    );
 
 export const selectPagination = (state: any): Pagination.Info =>
   state.characters.pagination;

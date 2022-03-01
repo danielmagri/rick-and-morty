@@ -9,6 +9,7 @@ export namespace Character {
     gender: GenderType;
     origin: Origin;
     created: string;
+    episode: string[]
   };
 
   export type Origin = {
