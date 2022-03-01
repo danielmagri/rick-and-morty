@@ -6,8 +6,6 @@ export namespace Pagination {
 
   export type Info = {
     count: number;
-    next: string;
-    prev: string;
     pages: number;
   };
 }

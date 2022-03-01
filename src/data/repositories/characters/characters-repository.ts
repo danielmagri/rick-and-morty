@@ -1,5 +1,5 @@
 import { GetCharacters } from "../../../domain/usecases";
 
 export interface CharactersRepository {
-  get(): Promise<GetCharacters.Response>;
+  get(params: GetCharacters.Params): Promise<GetCharacters.Response>;
 }
