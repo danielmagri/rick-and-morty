@@ -8,7 +8,7 @@ import {
   selectSidebar,
   sidebarSlice,
 } from "../../../core/context";
-import { ContainerStyle, ImageStyle, LabelStyle } from "./style";
+import { ContainerStyle, ImageStyle, LabelStyle, TitleStyle } from "./style";
 
 export const DetailsPage: React.FC = () => {
   const { id } = useParams();
@@ -40,6 +40,7 @@ export const DetailsPage: React.FC = () => {
       <Button
         variant="text"
         startIcon={<ArrowBack />}
+        sx={{ color: "secondary.main" }}
         onClick={handleClickBack}
       >
         Back
@@ -62,14 +63,22 @@ export const DetailsPage: React.FC = () => {
             marginTop: 4,
           }}
         >
-          <LabelStyle>{data?.id}</LabelStyle>
-          <LabelStyle>{data?.name}</LabelStyle>
-          <LabelStyle>{data?.status}</LabelStyle>
-          <LabelStyle>{data?.species}</LabelStyle>
-          <LabelStyle>{data?.type}</LabelStyle>
-          <LabelStyle>{data?.gender}</LabelStyle>
-          <LabelStyle>{data?.origin.name}</LabelStyle>
-          <LabelStyle>{data?.created}</LabelStyle>
+          <TitleStyle>ID</TitleStyle>
+          <LabelStyle>{data?.id || '-'}</LabelStyle>
+          <TitleStyle>Name</TitleStyle>
+          <LabelStyle>{data?.name || '-'}</LabelStyle>
+          <TitleStyle>Status</TitleStyle>
+          <LabelStyle>{data?.status || '-'}</LabelStyle>
+          <TitleStyle>Specie</TitleStyle>
+          <LabelStyle>{data?.species || '-'}</LabelStyle>
+          <TitleStyle>Type</TitleStyle>
+          <LabelStyle>{data?.type || '-'}</LabelStyle>
+          <TitleStyle>Gender</TitleStyle>
+          <LabelStyle>{data?.gender || '-'}</LabelStyle>
+          <TitleStyle>Origin</TitleStyle>
+          <LabelStyle>{data?.origin.name || '-'}</LabelStyle>
+          <TitleStyle>Created</TitleStyle>
+          <LabelStyle>{new Date(data?.created ?? '').toDateString() || '-'}</LabelStyle>
         </Box>
       </Box>
     </ContainerStyle>

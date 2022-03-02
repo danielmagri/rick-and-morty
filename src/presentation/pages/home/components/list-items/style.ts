@@ -2,8 +2,9 @@ import { styled } from "@mui/material";
 
 export const ContainerStyle = styled("div")({
   display: "flex",
-  flex: 1,
+  flexGrow: 1,
   justifyContent: "center",
-  flexWrap: "wrap",
-  borderRadius: 4,
+  flexFlow: "row wrap",
+  marginTop: "24px",
+  marginBottom: "24px",
 });

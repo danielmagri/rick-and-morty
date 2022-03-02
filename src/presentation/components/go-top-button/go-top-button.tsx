@@ -11,7 +11,7 @@ export const GoTopButton: React.FC = () => {
 
   useEffect(() => {
     const listener = () => {
-      const limit = window.innerHeight / 2;
+      const limit = window.innerHeight * 0.2;
       if (window.scrollY > limit && !showUpButton) {
         setShowUpButton(true);
       } else if (window.scrollY < limit && showUpButton) {
@@ -25,13 +25,13 @@ export const GoTopButton: React.FC = () => {
 
   return (
     <Fab
-      color="primary"
+      color="secondary"
       aria-label="add"
       onClick={handleScrollToTop}
       sx={{
         position: "fixed",
-        bottom: 24,
-        right: 24,
+        bottom: '64px',
+        right: '32px',
         display: showUpButton ? "inline" : "none",
       }}
     >

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Pagination, Box } from "@mui/material";
+import { Pagination, Box, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectPagination,
@@ -18,7 +18,6 @@ type HomePageProps = {
 };
 
 export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
-  
   const characters = useSelector(selectCharacters);
   const filter = useSelector(selectFilter);
   const pagination = useSelector(selectPagination);
@@ -58,7 +57,7 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
 
   return (
     <>
-      <Box sx={{ alignContent: "center" }}>
+      <Stack>
         {error !== undefined && <FailureMessage error={error} />}
         {!loading && error === undefined && <ListItems list={characters} />}
         {pagination.pages !== 0 && error === undefined && (
@@ -71,9 +70,14 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
             variant="outlined"
             shape="rounded"
             size="large"
+            sx={{
+              marginBottom: "24px",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
           />
         )}
-      </Box>
+      </Stack>
       <GoTopButton />
     </>
   );

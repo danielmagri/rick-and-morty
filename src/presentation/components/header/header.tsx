@@ -15,7 +15,12 @@ export const Header: React.FC = () => {
   };
 
   return (
-    <AppBar sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+    <AppBar
+      sx={{
+        zIndex: (theme) => theme.zIndex.drawer + 1,
+        background: (theme) => theme.palette.primary.main,
+      }}
+    >
       <Toolbar>
         {store.enabled && (
           <IconButton
