@@ -1,30 +1,30 @@
 import { styled, experimental_sx as sx } from "@mui/material";
 
-export const ContainerStyle = styled("div")(
+export const EpisodeContainerStyle = styled("div")(
   sx({
     display: "flex",
     flexDirection: "column",
-    width: { xs: "100%", sm: "60%" },
     alignItems: "start",
-    marginTop: 2,
-    marginLeft: "auto",
-    marginRight: "auto",
+    marginTop: "16px",
+    padding: "32px",
+    backgroundColor: "background.paper",
+    borderRadius: "4px",
   })
 );
 
-export const ImageStyle = styled("img")({
-  display: "block",
-  flexGrow: 1,
-  marginTop: 6,
+export const EpisodeLabelContainerStyle = styled("div")({
+  display: "flex",
+  marginBottom: "6px",
 });
 
-export const TitleStyle = styled("label")(
+export const EpisodeTitleStyle = styled("label")(
   sx({
     fontSize: 20,
     fontWeight: "bold",
     flexGrow: 1,
     textAlign: "center",
     color: "secondary.main",
+    marginRight: "8px",
   })
 );
 

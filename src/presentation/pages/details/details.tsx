@@ -1,27 +1,22 @@
 import { ArrowBack } from "@mui/icons-material";
-import { Box, Button, Tab, Tabs } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  selectCharacter,
-  selectSidebar,
-  sidebarSlice,
-} from "../../../core/context";
+import { selectCharacter, sidebarSlice } from "../../../core/context";
+import { GetEpisodes } from "../../../domain/usecases";
+import { EpisodesList } from "./components";
 import { ContainerStyle, ImageStyle, LabelStyle, TitleStyle } from "./style";
 
-export const DetailsPage: React.FC = () => {
+type DetailsPageProps = {
+  getEpisodes: GetEpisodes;
+};
+
+export const DetailsPage: React.FC<DetailsPageProps> = ({ getEpisodes }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const data = useSelector(selectCharacter(Number(id)));
-  const sidebar = useSelector(selectSidebar);
   const dispatch = useDispatch();
-
-  const [value, setValue] = useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
 
   const handleClickBack = () => {
     navigate("/");
@@ -64,23 +59,31 @@ export const DetailsPage: React.FC = () => {
           }}
         >
           <TitleStyle>ID</TitleStyle>
-          <LabelStyle>{data?.id || '-'}</LabelStyle>
+          <LabelStyle>{data?.id || "-"}</LabelStyle>
           <TitleStyle>Name</TitleStyle>
-          <LabelStyle>{data?.name || '-'}</LabelStyle>
+          <LabelStyle>{data?.name || "-"}</LabelStyle>
           <TitleStyle>Status</TitleStyle>
-          <LabelStyle>{data?.status || '-'}</LabelStyle>
+          <LabelStyle>{data?.status || "-"}</LabelStyle>
           <TitleStyle>Specie</TitleStyle>
-          <LabelStyle>{data?.species || '-'}</LabelStyle>
+          <LabelStyle>{data?.species || "-"}</LabelStyle>
           <TitleStyle>Type</TitleStyle>
-          <LabelStyle>{data?.type || '-'}</LabelStyle>
+          <LabelStyle>{data?.type || "-"}</LabelStyle>
           <TitleStyle>Gender</TitleStyle>
-          <LabelStyle>{data?.gender || '-'}</LabelStyle>
+          <LabelStyle>{data?.gender || "-"}</LabelStyle>
           <TitleStyle>Origin</TitleStyle>
-          <LabelStyle>{data?.origin.name || '-'}</LabelStyle>
+          <LabelStyle>{data?.origin.name || "-"}</LabelStyle>
           <TitleStyle>Created</TitleStyle>
-          <LabelStyle>{new Date(data?.created ?? '').toDateString() || '-'}</LabelStyle>
+          <LabelStyle>
+            {new Date(data?.created ?? "").toDateString() || "-"}
+          </LabelStyle>
         </Box>
       </Box>
+      {data?.episode !== undefined && (
+        <EpisodesList
+          episodesepsUrl={data.episode}
+          getEpisodes={getEpisodes}
+        />
+      )}
     </ContainerStyle>
   );
 };
