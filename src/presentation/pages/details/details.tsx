@@ -6,7 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { selectCharacter, sidebarSlice } from "../../../core/context";
 import { GetEpisodes } from "../../../domain/usecases";
 import { EpisodesList } from "./components";
-import { ContainerStyle, ImageStyle, LabelStyle, TitleStyle } from "./style";
+import {
+  ContainerStyle,
+  ImageStyle,
+  LabelStyle,
+  TitleStyle,
+  ContainerInfoStyle,
+  ContainerDataStyle,
+} from "./style";
 
 type DetailsPageProps = {
   getEpisodes: GetEpisodes;
@@ -40,24 +47,9 @@ export const DetailsPage: React.FC<DetailsPageProps> = ({ getEpisodes }) => {
       >
         Back
       </Button>
-      <Box
-        sx={{
-          display: "flex",
-          width: "100%",
-          flexDirection: { xs: "column", sm: "row" },
-        }}
-      >
+      <ContainerInfoStyle>
         <ImageStyle src={data?.image} />
-        <Box
-          sx={{
-            flexGrow: 2,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "start",
-            marginLeft: 4,
-            marginTop: 4,
-          }}
-        >
+        <ContainerDataStyle>
           <TitleStyle>ID</TitleStyle>
           <LabelStyle>{data?.id || "-"}</LabelStyle>
           <TitleStyle>Name</TitleStyle>
@@ -76,13 +68,10 @@ export const DetailsPage: React.FC<DetailsPageProps> = ({ getEpisodes }) => {
           <LabelStyle>
             {new Date(data?.created ?? "").toDateString() || "-"}
           </LabelStyle>
-        </Box>
-      </Box>
+        </ContainerDataStyle>
+      </ContainerInfoStyle>
       {data?.episode !== undefined && (
-        <EpisodesList
-          episodesepsUrl={data.episode}
-          getEpisodes={getEpisodes}
-        />
+        <EpisodesList episodesepsUrl={data.episode} getEpisodes={getEpisodes} />
       )}
     </ContainerStyle>
   );

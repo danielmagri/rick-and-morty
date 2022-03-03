@@ -11,7 +11,7 @@ import {
 import { GetCharacters } from "../../../domain/usecases";
 import { ListItems } from "./components";
 import { handleEither } from "../../../core/models";
-import { FailureMessage, GoTopButton } from "../../components";
+import { FailureMessage, GoTopButton, Loading } from "../../components";
 
 type HomePageProps = {
   getCharacters: GetCharacters;
@@ -58,9 +58,12 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
   return (
     <>
       <Stack>
-        {error !== undefined && <FailureMessage error={error} />}
+        {error !== undefined && (
+          <FailureMessage error={error} onClickTryAgain={fetchData} />
+        )}
+
         {!loading && error === undefined && <ListItems list={characters} />}
-        {pagination.pages !== 0 && error === undefined && (
+        {pagination.pages !== 0 && error === undefined && !loading && (
           <Pagination
             count={pagination.pages}
             page={currentPage}
@@ -78,6 +81,16 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
           />
         )}
       </Stack>
+      {loading && (
+        <Loading
+          containerSx={{
+            marginTop: "50px",
+            height: "100%",
+            flexGrow: 1,
+          }}
+          size={80}
+        />
+      )}
       <GoTopButton />
     </>
   );

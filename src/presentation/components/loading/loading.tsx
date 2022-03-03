@@ -3,9 +3,10 @@ import { CircularProgress, Box, SxProps, Theme } from "@mui/material";
 
 type LoadingProps = {
   containerSx?: SxProps<Theme> | undefined;
+  size?: number
 };
 
-export const Loading: React.FC<LoadingProps> = ({ containerSx }) => {
+export const Loading: React.FC<LoadingProps> = ({ containerSx, size = 40 }) => {
   return (
     <Box
       sx={{
@@ -15,7 +16,7 @@ export const Loading: React.FC<LoadingProps> = ({ containerSx }) => {
         alignContent: "center",
       }}
     >
-      <CircularProgress color="secondary" />
+      <CircularProgress color="secondary" size={size}/>
     </Box>
   );
 };

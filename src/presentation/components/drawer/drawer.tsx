@@ -24,7 +24,7 @@ import { Character } from "../../../domain/models";
 export const SideBar: React.FC = (props) => {
   const store = useSelector(selectSidebar);
   const filter = useSelector(selectFilter);
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string | undefined>(undefined);
 
   const dispatch = useDispatch();
 
@@ -68,7 +68,7 @@ export const SideBar: React.FC = (props) => {
         <InputLabel htmlFor="outlined-name">Name</InputLabel>
         <OutlinedInput
           id="outlined-name"
-          value={name}
+          value={name ?? ""}
           onChange={(event) => handleChangeName(event.target.value)}
           endAdornment={
             <InputAdornment position="end">

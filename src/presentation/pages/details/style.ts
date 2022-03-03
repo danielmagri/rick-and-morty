@@ -4,11 +4,32 @@ export const ContainerStyle = styled("div")(
   sx({
     display: "flex",
     flexDirection: "column",
-    width: { xs: "100%", sm: "60%" },
+    width: { xs: "100%", md: "60%" },
+    maxWidth: "1200px",
     alignItems: "start",
     marginTop: 2,
     marginLeft: "auto",
     marginRight: "auto",
+  })
+);
+
+export const ContainerInfoStyle = styled("div")(
+  sx({
+    display: "flex",
+    width: "100%",
+    maxWidth: "1200px",
+    flexDirection: { xs: "column", sm: "row" },
+  })
+);
+
+export const ContainerDataStyle = styled("div")(
+  sx({
+    flexGrow: 2,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "start",
+    marginLeft: 4,
+    marginTop: 4,
   })
 );
 

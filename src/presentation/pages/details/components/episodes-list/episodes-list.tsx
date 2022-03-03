@@ -9,6 +9,7 @@ import {
   EpisodeLabelContainerStyle,
   EpisodeTitleStyle,
   LabelStyle,
+  ContainerStyle,
 } from "./style";
 
 type EpisodesListProps = {
@@ -68,13 +69,7 @@ export const EpisodesList: React.FC<EpisodesListProps> = ({
         <Loading containerSx={{ width: "100%", marginTop: "32px" }} />
       )}
       {episodes.length !== 0 && (
-        <Box
-          sx={{
-            width: "100%",
-            maxWidth: "1200px",
-            marginTop: "24px",
-          }}
-        >
+        <ContainerStyle>
           <Tabs
             value={selectedEpisode}
             onChange={handleChangeEpisode}
@@ -112,7 +107,7 @@ export const EpisodesList: React.FC<EpisodesListProps> = ({
               </LabelStyle>
             </EpisodeLabelContainerStyle>
           </EpisodeContainerStyle>
-        </Box>
+        </ContainerStyle>
       )}
       <Snackbar
         open={error !== undefined}
