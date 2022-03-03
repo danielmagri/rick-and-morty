@@ -1,4 +1,4 @@
-import { Box, Tabs, Tab, Alert, Snackbar } from "@mui/material";
+import { Tabs, Tab, Alert, Snackbar } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { handleEither } from "../../../../../core/models";
 import { Episode } from "../../../../../domain/models";
@@ -49,7 +49,7 @@ export const EpisodesList: React.FC<EpisodesListProps> = ({
   };
 
   const handleClose = (
-    event: React.SyntheticEvent | Event,
+    _event: React.SyntheticEvent | Event,
     reason?: string
   ) => {
     if (reason === "clickaway") {
@@ -114,7 +114,7 @@ export const EpisodesList: React.FC<EpisodesListProps> = ({
         autoHideDuration={4000}
         onClose={handleClose}
       >
-        <Alert severity="error">{error?.message}</Alert>
+        <Alert severity="error">Could not load episodes</Alert>
       </Snackbar>
     </>
   );

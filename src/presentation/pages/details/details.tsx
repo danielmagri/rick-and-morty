@@ -1,5 +1,5 @@
 import { ArrowBack } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -30,11 +30,15 @@ export const DetailsPage: React.FC<DetailsPageProps> = ({ getEpisodes }) => {
   };
 
   useEffect(() => {
-    dispatch(sidebarSlice.actions.setEnabled(false));
+    if (data === undefined) {
+      handleClickBack();
+    } else {
+      dispatch(sidebarSlice.actions.setEnabled(false));
 
-    return () => {
-      dispatch(sidebarSlice.actions.setEnabled(true));
-    };
+      return () => {
+        dispatch(sidebarSlice.actions.setEnabled(true));
+      };
+    }
   }, []);
 
   return (
@@ -70,7 +74,7 @@ export const DetailsPage: React.FC<DetailsPageProps> = ({ getEpisodes }) => {
           </LabelStyle>
         </ContainerDataStyle>
       </ContainerInfoStyle>
-      {data?.episode !== undefined && (
+      {data?.episode !== undefined && data?.episode.length !== 0 && (
         <EpisodesList episodesepsUrl={data.episode} getEpisodes={getEpisodes} />
       )}
     </ContainerStyle>

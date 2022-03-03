@@ -2,9 +2,11 @@ import { styled, experimental_sx as sx } from "@mui/material";
 
 export const ContainerStyle = styled("div")(
   sx({
+    display: "flex",
+    flexDirection: "column",
     width: "100%",
-    maxWidth: "1200px",
     marginTop: "24px",
+    marginBottom: "32px",
   })
 );
 

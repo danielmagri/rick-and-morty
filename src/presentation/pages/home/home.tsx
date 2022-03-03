@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Pagination, Box, Stack } from "@mui/material";
+import { Pagination, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectPagination,
@@ -72,7 +72,6 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
             }}
             variant="outlined"
             shape="rounded"
-            size="large"
             sx={{
               marginBottom: "24px",
               marginLeft: "auto",
@@ -84,8 +83,7 @@ export const HomePage: React.FC<HomePageProps> = ({ getCharacters }) => {
       {loading && (
         <Loading
           containerSx={{
-            marginTop: "50px",
-            height: "100%",
+            height: "100vh",
             flexGrow: 1,
           }}
           size={80}

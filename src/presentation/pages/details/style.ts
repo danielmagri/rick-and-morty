@@ -4,8 +4,8 @@ export const ContainerStyle = styled("div")(
   sx({
     display: "flex",
     flexDirection: "column",
-    width: { xs: "100%", md: "60%" },
-    maxWidth: "1200px",
+    width: "1200px",
+    maxWidth: "100vw",
     alignItems: "start",
     marginTop: 2,
     marginLeft: "auto",
@@ -17,7 +17,6 @@ export const ContainerInfoStyle = styled("div")(
   sx({
     display: "flex",
     width: "100%",
-    maxWidth: "1200px",
     flexDirection: { xs: "column", sm: "row" },
   })
 );

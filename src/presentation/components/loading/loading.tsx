@@ -13,7 +13,7 @@ export const Loading: React.FC<LoadingProps> = ({ containerSx, size = 40 }) => {
         ...containerSx,
         display: "flex",
         justifyContent: "center",
-        alignContent: "center",
+        alignItems: 'center',
       }}
     >
       <CircularProgress color="secondary" size={size}/>

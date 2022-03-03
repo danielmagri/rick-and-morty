@@ -14,7 +14,7 @@ export class GetEpisodesImpl implements GetEpisodes {
   async get(params: GetEpisodes.Params): Promise<Either<GetEpisodes.Response>> {
     try {
       const result = await this.repository.get(params.join(","));
-      return makeRight(result);
+      return makeRight(Array.isArray(result) ? result : [result]);
     } catch (error) {
       if (error instanceof Failure) {
         return makeLeft(error);
