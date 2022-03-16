@@ -1,4 +1,4 @@
-# Rick and Morty App
+# Rick and Morty
 
 A simple web application that consume the [The Rick and Morty API](https://rickandmortyapi.com/) and present the list of characters and them details.
 
